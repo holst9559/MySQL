@@ -1,6 +1,5 @@
 USE laboration1;
 
-/*
 -- Uppgift 1
 CREATE TABLE IF NOT EXISTS successful_mission AS
     SELECT *
@@ -10,8 +9,6 @@ CREATE TABLE IF NOT EXISTS successful_mission AS
 -- Uppgift 2
 ALTER TABLE successful_mission
     MODIFY mission_id int PRIMARY KEY AUTO_INCREMENT;
-
-
 
 -- Uppgift 3
 UPDATE moon_mission
@@ -23,7 +20,6 @@ UPDATE successful_mission
 -- Uppgift 4
 DELETE FROM successful_mission
     WHERE launch_date >= '2010-01-01';
-
 
 -- Uppgift 5
 UPDATE account
@@ -42,7 +38,6 @@ DELETE FROM account
     WHERE gender = 'female'
     AND SUBSTRING(ssn, 1, 2) < 70;
 
-
 -- Uppgift 7
 SELECT 'male'                             AS gender,
        AVG(YEAR(CURDATE()) -
@@ -57,9 +52,3 @@ SELECT 'female'                           AS gender,
                             '%Y-%m-%d'))) AS average_age
 FROM account
 WHERE SUBSTR(ssn, LENGTH(ssn) - 1, 1) % 2 = 0;
-*/
-SELECT * FROM account;
-
-
-
-
