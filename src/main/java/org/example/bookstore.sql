@@ -2,6 +2,11 @@ DROP DATABASE IF EXISTS bookstore;
 CREATE DATABASE bookstore;
 USE bookstore;
 
+DROP TABLE IF EXISTS language;
+DROP TABLE IF EXISTS author;
+DROP TABLE IF EXISTS book;
+DROP TABLE IF EXISTS bookstore;
+DROP TABLE IF EXISTS inventory;
 
 CREATE TABLE language
 (
@@ -19,7 +24,7 @@ CREATE TABLE author
 
 CREATE TABLE book
 (
-    isbn varchar(255) PRIMARY KEY CHECK (isbn REGEXP '[0-9]{13}'),
+    isbn VARCHAR(255) PRIMARY KEY CHECK (isbn REGEXP '[0-9]{13}'),
     title VARCHAR(255),
     language_id INT NOT NULL,
     price DECIMAL(6,2) NOT NULL,
@@ -39,14 +44,14 @@ CREATE TABLE bookstore
 CREATE TABLE inventory
 (
     store_id INT,
-    isbn VARCHAR(255),
+    isbn CHAR(13),
     amount INT,
     PRIMARY KEY (store_id, isbn),
     FOREIGN KEY (store_id) REFERENCES bookstore (id),
     FOREIGN KEY (isbn) REFERENCES book (isbn)
 );
 
-/*
+
 INSERT INTO language (language)
 VALUES ('English'),
        ('Swedish'),
@@ -64,7 +69,22 @@ VALUES('9780261102354', 'The Fellowship of the Ring', 1, 122, 1991-07-04, 2),
       ('9789175031828', 'Game of thrones - Drakarnas dans', 2, 89, 2013-06-14, 1),
       ('9781473232273', 'Wiedzmin', 3, 99, 2007-06-01, 3),
       ('9781473235090', 'The Last Wish', 1, 99, 2021-12-16, 3);
-*/
+
+INSERT INTO bookstore (store_name, city_name)
+VALUES('Ugglan', 'Skara'),
+      ('Akademibokhandeln', 'Göteborg');
+
+INSERT INTO inventory (store_id, isbn, amount)
+VALUES (1, '9780261102354', 20),
+       (1, '9780006479888', 14),
+       (1, '9781473235090', 10),
+       (2, '9780261102354', 4),
+       (2, '9789113084909', 14),
+       (2, '9780006479888', 24),
+       (2, '9789175031828', 40),
+       (2, '9781473232273', 1),
+       (2, '9781473235090', 12);
+
 
 
 
