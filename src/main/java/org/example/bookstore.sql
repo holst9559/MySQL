@@ -58,17 +58,17 @@ VALUES ('English'),
        ('Polish');
 
 INSERT INTO author (first_name, last_name, birth_date)
-VALUES('George', 'Martin', 1948-09-20),
-      ('J.R.R', 'Tolien', 1892-01-03),
-      ('Andrzej', 'Sapkowski', 1948-06-21);
+VALUES('George', 'Martin', '1948-09-20'),
+      ('J.R.R', 'Tolien', '1892-01-03'),
+      ('Andrzej', 'Sapkowski', '1948-06-21');
 
 INSERT INTO book(isbn, title, language_id, price, publication_date, author_id)
-VALUES('9780261102354', 'The Fellowship of the Ring', 1, 122, 1991-07-04, 2),
-      ('9789113084909', 'Ringens Brödraskap', 2, 199, 2019-08-28, 2),
-      ('9780006479888', 'Game of Thrones', 1, 127, 1997-04-01, 1),
-      ('9789175031828', 'Game of thrones - Drakarnas dans', 2, 89, 2013-06-14, 1),
-      ('9781473232273', 'Wiedzmin', 3, 99, 2007-06-01, 3),
-      ('9781473235090', 'The Last Wish', 1, 99, 2021-12-16, 3);
+VALUES('9780261102354', 'The Fellowship of the Ring', 1, 122, '1991-07-04', 2),
+      ('9789113084909', 'Ringens Brödraskap', 2, 199, '2019-08-28', 2),
+      ('9780006479888', 'Game of Thrones', 1, 127, '1997-04-01', 1),
+      ('9789175031828', 'Game of thrones - Drakarnas dans', 2, 89, '2013-06-14', 1),
+      ('9781473232273', 'Wiedzmin', 3, 99, '2007-06-01', 3),
+      ('9781473235090', 'The Last Wish', 1, 99, '2021-12-16', 3);
 
 INSERT INTO bookstore (store_name, city_name)
 VALUES('Ugglan', 'Skara'),
@@ -85,6 +85,15 @@ VALUES (1, '9780261102354', 20),
        (2, '9781473232273', 1),
        (2, '9781473235090', 12);
 
+CREATE VIEW total_author_book_value AS
+SELECT CONCAT(author.first_name, ' ', author.last_name) as name,
+       YEAR(current_date()) - YEAR(author.birth_date) as age,
+       COUNT(DISTINCT book.title) as book_title_count,
+       SUM(book.price * inventory.amount) as inventory_value
+FROM author
+    JOIN book ON author.id = book.author_id
+    LEFT JOIN inventory on book.isbn = inventory.isbn
+GROUP BY author_id;
 
 
 
