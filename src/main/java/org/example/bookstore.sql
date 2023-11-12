@@ -109,5 +109,3 @@ CREATE USER 'dev'@'%' IDENTIFIED BY 'password';
 
 GRANT INSERT, UPDATE, DELETE, SELECT on bookstore.* TO 'web'@'%';
 GRANT INSERT, UPDATE, DELETE, SELECT, CREATE, DROP on bookstore.* TO 'dev'@'%';
-
-
