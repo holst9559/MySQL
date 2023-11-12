@@ -104,7 +104,10 @@ FROM author
     LEFT JOIN inventory on book.isbn = inventory.isbn
 GROUP BY author_id;
 
+CREATE USER 'web'@'%' IDENTIFIED BY 'password';
+CREATE USER 'dev'@'%' IDENTIFIED BY 'password';
 
-
+GRANT INSERT, UPDATE, DELETE, SELECT on bookstore.* TO 'web'@'%';
+GRANT INSERT, UPDATE, DELETE, SELECT, CREATE, DROP on bookstore.* TO 'dev'@'%';
 
 
